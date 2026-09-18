@@ -12,6 +12,10 @@ A [Sine](https://github.com/CosmoCreeper/Sine) mod that reworks Zen's frame into
 
 ---
 
+![Zia](https://github.com/user-attachments/assets/998f92b8-74ea-4bac-8131-6ab4a9993ab7)
+
+---
+
 ## Install
 
 Zia is a JavaScript mod, so Sine needs permission to load scripts from outside its marketplace.
@@ -56,7 +60,15 @@ There's an icon picker too — a third tab beside Zen's own, holding 1,512 Phosp
 
 ### Media and split view
 
-Playing music gives you a card with the track's artwork and a glow in its colours. Sound bars in those same colours appear on essentials and tabs, turning to dots when muted, and clicking them toggles the sound. Split view gives each pane its own toolbar, and dragging a tab over the page brings up drop cards for either side.
+Playing music gives you a card with the track's artwork and a glow in its colours. Sound bars in those same colours appear on essentials and tabs, turning to dots when muted, and clicking them toggles the sound.
+
+Split view gives each pane its own toolbar. Dragging a tab over the page brings up drop cards for either side, growing and turning blue as you get near the edge:
+
+![Dragging a tab into a split](https://github.com/user-attachments/assets/50fed722-962c-4af6-9979-18800ae01a50)
+
+Drop it and both sites sit side by side, each with its own address and controls:
+
+![Two sites in split view](https://github.com/user-attachments/assets/5318d0ce-d6b3-4adb-aef9-56ffbed72ae9)
 
 ---
 
