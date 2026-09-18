@@ -54,13 +54,23 @@ Opened, it's Dia's panel: short rows with air around them, one size and weight o
 
 ### The sidebar
 
-Essentials sit as tiles, four to a row and six when the sidebar is wide. Folders get hover boxes, a bounce when they open, and emoji or icon covers. Downloads live next to the space name with a progress ring around them. Closing a tab by accident is undone with Cmd/Ctrl+Z for ten seconds afterwards.
+Essentials sit as tiles, four to a row and six when the sidebar is wide. Folders get hover boxes, a bounce when they open, and icon or emoji covers. Downloads live next to the space name with a progress ring around them. Closing a tab by accident is undone with Cmd/Ctrl+Z for ten seconds afterwards.
 
-There's an icon picker too — a third tab beside Zen's own, holding 1,512 Phosphor icons with its own search.
+![Essentials and folders in the sidebar](https://github.com/user-attachments/assets/0c439e9d-651e-414c-8b85-d5bc8308aef4)
+
+Spaces with a colour of their own carry it through the sidebar:
+
+![A coloured space](https://github.com/user-attachments/assets/2b8748a4-d7fc-4ef0-a5b3-41ab3243e83b)
+
+Covers come from an icon picker Zia adds as a third tab beside Zen's own: 1,512 Phosphor icons with their own search, and Zen's emojis still there if you'd rather use one of those.
+
+![The icon picker](https://github.com/user-attachments/assets/07c2baf3-9af4-4d7f-a6c9-b9701070312a)
 
 ### Media and split view
 
-Playing music gives you a card with the track's artwork and a glow in its colours. Sound bars in those same colours appear on essentials and tabs, turning to dots when muted, and clicking them toggles the sound.
+Playing music gives you a card with the track's artwork and a glow in its colours. Sound bars in those same colours appear on essentials and tabs, turning to dots when muted, and clicking them toggles the sound. It handles livestreams as well as ordinary videos.
+
+![The music player card](https://github.com/user-attachments/assets/94cb66a2-99d8-4bdb-8ae7-0e676ea59718)
 
 Split view gives each pane its own toolbar. Dragging a tab over the page brings up drop cards for either side, growing and turning blue as you get near the edge:
 
