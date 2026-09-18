@@ -22,7 +22,7 @@
 
   --zia-tab-shine-layers:
     linear-gradient(to bottom right, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.09) 28%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.09) 72%, rgba(255, 255, 255, 0.32));
-  --zia-essential-min-width: 44px;
+  --zia-essential-min-width: 54px;
   --zia-essential-height: 41px;
   --zia-essential-inner-tighten: 1;
   --zia-essential-radius: 12px;
@@ -607,25 +607,9 @@
 }
 
 :root[zen-sidebar-expanded="true"] .zen-essentials-container {
-  container-type: inline-size;
-
   &,
   &[data-hack-type] {
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  }
-
-  @container (max-width: 184px) {
-    &,
-    &[data-hack-type] {
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-  }
-
-  @container (min-width: 340px) {
-    &,
-    &[data-hack-type] {
-      grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-    }
+    grid-template-columns: repeat(auto-fill, minmax(var(--zia-essential-min-width), 1fr)) !important;
   }
 
   & > .tabbrowser-tab[zen-essential] {
