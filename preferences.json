@@ -1,0 +1,32 @@
+[
+  {
+    "type": "separator",
+    "label": "New tabs"
+  },
+  {
+    "type": "checkbox",
+    "label": "New tabs open your default search engine's page",
+    "property": "zia.newtab.search-engine",
+    "defaultValue": true
+  },
+  {
+    "type": "separator",
+    "label": "Folders"
+  },
+  {
+    "type": "checkbox",
+    "label": "Tiny bounce when folders open or close",
+    "property": "zia.folders.bounce",
+    "defaultValue": true
+  },
+  {
+    "type": "separator",
+    "label": "Loading bar"
+  },
+  {
+    "type": "checkbox",
+    "label": "Use Zen's accent color for the loading bar (default: Zia blue)",
+    "property": "zia.loading-bar.accent-color",
+    "defaultValue": false
+  }
+]

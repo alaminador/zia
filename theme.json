@@ -1,0 +1,26 @@
+{
+  "id": "zia",
+  "name": "Zia",
+  "description": "Makes Zen's browser frame look like Dia: page card, site-colored toolbar, Dia-style sidebar.",
+  "version": "2.6.0",
+  "style": {
+    "chrome": "chrome.css"
+  },
+  "scripts": {
+    "zia.uc.js": {
+      "include": [
+        "chrome://browser/content/browser.xhtml"
+      ]
+    }
+  },
+  "tags": [
+    "chrome",
+    "dia",
+    "layout",
+    "sleek"
+  ],
+  "fork": [
+    "zen"
+  ],
+  "preferences": "preferences.json"
+}
