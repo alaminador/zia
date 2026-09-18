@@ -1,6 +1,34 @@
 [
   {
     "type": "separator",
+    "label": "Features"
+  },
+  {
+    "type": "checkbox",
+    "label": "Music player card",
+    "property": "zia.features.media-player",
+    "defaultValue": true
+  },
+  {
+    "type": "checkbox",
+    "label": "Find in page bar",
+    "property": "zia.features.find-bar",
+    "defaultValue": true
+  },
+  {
+    "type": "checkbox",
+    "label": "Icon picker (1,512 Phosphor icons)",
+    "property": "zia.features.icon-picker",
+    "defaultValue": true
+  },
+  {
+    "type": "checkbox",
+    "label": "Undo a closed tab with Cmd/Ctrl+Z",
+    "property": "zia.features.undo-close",
+    "defaultValue": true
+  },
+  {
+    "type": "separator",
     "label": "New tabs"
   },
   {

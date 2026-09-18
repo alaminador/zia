@@ -64,11 +64,19 @@ Playing music gives you a card with the track's artwork and a glow in its colour
 
 **Settings → Sine Mods → Zia**
 
-| Option | Default |
+Parts of the theme can be switched off individually. Everything is on by default.
+
+| Feature | Default |
 | --- | --- |
+| Music player card | on |
+| Find in page bar | on |
+| Icon picker | on |
+| Undo a closed tab with Cmd/Ctrl+Z | on |
 | New tabs open your default search engine's page | on |
 | Use Zen's accent colour for the loading bar | off |
 | Small bounce when folders open or close | on |
+
+More features become switchable with each release. The styling toggles apply straight away; the ones that change behaviour need a restart.
 
 <details>
 <summary><b>Zen settings Zia changes</b></summary>

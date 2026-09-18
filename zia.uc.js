@@ -2865,6 +2865,26 @@
     set("zen.widget.mac.mono-window-controls", false);
     set("zen.urlbar.replace-newtab", false);
     set("zen.splitView.enable-tab-drop", false);
+
+    for (const feature of FEATURES) {
+      set(`zia.features.${feature}`, true);
+    }
+  }
+
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close"];
+
+  function featureOn(name) {
+    try {
+      return Services.prefs.getBoolPref(`zia.features.${name}`, true);
+    } catch (err) {
+      return true;
+    }
+  }
+
+  function ifOn(feature, name, fn) {
+    if (featureOn(feature)) {
+      safely(name, fn);
+    }
   }
 
   function addDownloadProgress() {
@@ -3229,20 +3249,20 @@
     safely("allowEmojiFolderIcons", allowEmojiFolderIcons);
     safely("hideWwwInUrlbar", hideWwwInUrlbar);
     safely("watchRightEdges", watchRightEdges);
-    safely("watchMediaGlow", watchMediaGlow);
+    ifOn("media-player", "watchMediaGlow", watchMediaGlow);
     safely("watchTabSoundBars", watchTabSoundBars);
     safely("watchSplitDrop", watchSplitDrop);
     safely("watchSplitPanes", watchSplitPanes);
-    safely("watchFindBars", watchFindBars);
+    ifOn("find-bar", "watchFindBars", watchFindBars);
     safely("watchSpaceColor", watchSpaceColor);
     safely("animateEssentialsAdds", animateEssentialsAdds);
-    safely("watchUndoClose", watchUndoClose);
+    ifOn("undo-close", "watchUndoClose", watchUndoClose);
     safely("watchTypedAddress", watchTypedAddress);
     safely("registerScrollActor", registerScrollActor);
     safely("watchScrollInput", watchScrollInput);
     safely("createTitleElement", createTitleElement);
     safely("addDownloadProgress", addDownloadProgress);
-    safely("addIconPicker", addIconPicker);
+    ifOn("icon-picker", "addIconPicker", addIconPicker);
     safely("watchCompactTopRow", watchCompactTopRow);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {

@@ -1090,6 +1090,7 @@ zen-folder > .tab-group-label-container {
   color: rgb(255, 255, 255) !important;
 }
 
+@media -moz-pref("zia.features.media-player") {
 #zen-media-controls-toolbar {
   --zia-media-ease: var(--zen-media-stack-easing, cubic-bezier(0.25, 1, 0.5, 1));
 
@@ -1557,6 +1558,7 @@ zen-folder > .tab-group-label-container {
     opacity: 0 !important;
   }
 }
+}
 
 #zia-split-drop {
   --zia-drop-pull: 0px;
@@ -1835,6 +1837,7 @@ tab-group[split-view-group] .tab-group-container > .tabbrowser-tab::after {
   }
 }
 
+@media -moz-pref("zia.features.find-bar") {
 .browserContainer:has(> findbar) {
   position: relative;
 }
@@ -1991,6 +1994,7 @@ findbar {
       background: rgba(255, 255, 255, 0.1) !important;
     }
   }
+}
 }
 
 :root[zia-split="true"]:not([inDOMFullscreen="true"]):not([popup-window]) {
@@ -2324,8 +2328,10 @@ tooltip[default="true"] {
   display: none !important;
 }
 
+@media -moz-pref("zia.features.media-player") {
 #zen-media-controls-toolbar .zen-media-card {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07) !important;
+}
 }
 
 #zen-loading-progress-bar {
@@ -2370,6 +2376,7 @@ tooltip[default="true"] {
   }
 }
 
+@media -moz-pref("zia.features.icon-picker") {
 #PanelUI-zen-emojis-picker[only-svg-icons="true"] :is(#PanelUI-zen-emojis-picker-header, #PanelUI-zen-emojis-picker-search) {
   display: flex !important;
   visibility: visible !important;
@@ -2416,6 +2423,7 @@ tooltip[default="true"] {
 .zia-icon-item {
   -moz-context-properties: fill, fill-opacity, stroke;
   fill: rgba(255, 255, 255, 0.85);
+}
 }
 
 :root[zen-compact-mode="true"] .zen-toolbar-background {
