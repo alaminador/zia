@@ -2172,6 +2172,11 @@ findbar {
   list-style-image: url("chrome://sine/content/zia/icons/downloads.svg") !important;
 }
 
+#downloads-button[hidden],
+#downloads-button[hidden="true"] {
+  display: none !important;
+}
+
 #downloads-button {
   display: flex !important;
   align-items: center !important;
