@@ -614,6 +614,13 @@
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 
+  @container (max-width: 184px) {
+    &,
+    &[data-hack-type] {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+  }
+
   @container (min-width: 340px) {
     &,
     &[data-hack-type] {
