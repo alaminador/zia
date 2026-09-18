@@ -1,8 +1,8 @@
 # Zia
 
-**Zen Browser, with Dia's face.**
+**Zen Browser, with a Dia-inspired face.**
 
-A [Sine](https://github.com/CosmoCreeper/Sine) mod that reworks Zen's frame into something close to [Dia](https://www.diabrowser.com): the page in a rounded card, a toolbar that takes the colour of the site under it, and a Dia-style sidebar and address bar.
+A [Sine](https://github.com/CosmoCreeper/Sine) mod that reworks Zen's frame, taking its cues from [Dia](https://www.diabrowser.com): the page in a rounded card, a toolbar that takes the colour of the site under it, and a sidebar and address bar in the same spirit. Some of it goes its own way — the music player is Zia's own design, and Dia has nothing like it.
 
 ![Status](https://img.shields.io/badge/status-alpha-orange)
 ![Platform](https://img.shields.io/badge/tested%20on-macOS%20%C2%B7%20dark%20mode-informational)
@@ -50,7 +50,7 @@ The page and toolbar sit together in one rounded card. The toolbar takes the col
 
 ### The address bar
 
-Opened, it's Dia's panel: short rows with air around them, one size and weight of text throughout, and none of Firefox's chips, row menus or one-off engine bars. What you type stays lined up with the results underneath it.
+Opened, the panel follows Dia's shape: short rows with air around them, one size and weight of text throughout, and none of Firefox's chips, row menus or one-off engine bars. What you type stays lined up with the results underneath it.
 
 ### The sidebar
 
@@ -120,6 +120,10 @@ Changed at the default level only. If you've set either yourself in `about:confi
 </details>
 
 ---
+
+## About the name and the look
+
+Zia is an independent, unofficial project. It isn't affiliated with, endorsed by, or connected to Dia or The Browser Company, and it contains none of their code or assets. It's a Zen Browser theme built by eye, taking design inspiration from a browser I liked the look of.
 
 ## Credits
 

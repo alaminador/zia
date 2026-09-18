@@ -1032,6 +1032,12 @@ zen-folder[collapsed] > .tab-group-label-container > label {
   overflow-clip-margin: 16px !important;
 }
 
+@media (-moz-platform: windows) {
+  :root[zen-sidebar-expanded="true"] :is(#tabbrowser-tabs, #tabbrowser-arrowscrollbox) {
+    padding-bottom: calc(var(--zia-active-glow-blur) + var(--zia-active-glow-spread) + var(--zia-active-glow-reach)) !important;
+  }
+}
+
 #navigator-toolbox :is(arrowscrollbox, .workspace-arrowscrollbox, #tabbrowser-arrowscrollbox)::part(scrollbox),
 #navigator-toolbox :is(.workspace-arrowscrollbox, #tabbrowser-arrowscrollbox, .zen-essentials-container, #tabbrowser-tabs) {
   scrollbar-width: none !important;
