@@ -1033,12 +1033,13 @@ zen-folder[collapsed] > .tab-group-label-container > label {
 }
 
 @media (-moz-platform: windows) {
-  :root[zen-sidebar-expanded="true"] :is(.workspace-arrowscrollbox, #tabbrowser-tabs, #tabbrowser-arrowscrollbox) {
+  :is(.workspace-arrowscrollbox, #tabbrowser-tabs, #tabbrowser-arrowscrollbox) {
     padding-bottom: calc(var(--zia-active-glow-blur) + var(--zia-active-glow-spread) + var(--zia-active-glow-reach)) !important;
   }
 
-  :root[zen-sidebar-expanded="true"] .workspace-arrowscrollbox::part(scrollbox) {
+  :is(.workspace-arrowscrollbox, #tabbrowser-arrowscrollbox)::part(scrollbox) {
     padding-bottom: calc(var(--zia-active-glow-blur) + var(--zia-active-glow-spread) + var(--zia-active-glow-reach)) !important;
+    overflow-clip-margin: calc(var(--zia-active-glow-blur) + var(--zia-active-glow-spread) + var(--zia-active-glow-reach)) !important;
   }
 }
 

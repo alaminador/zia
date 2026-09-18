@@ -2,7 +2,8 @@
   "id": "zia",
   "name": "Zia",
   "description": "Makes Zen's browser frame look like Dia: page card, site-colored toolbar, Dia-style sidebar.",
-  "version": "2.7.3",
+  "author": "z1n-k",
+  "version": "2.7.5",
   "style": {
     "chrome": "chrome.css"
   },
@@ -22,5 +23,6 @@
   "fork": [
     "zen"
   ],
-  "preferences": "preferences.json"
+  "preferences": "preferences.json",
+  "homepage": "https://github.com/z1n-k/zia"
 }
