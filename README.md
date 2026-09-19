@@ -110,6 +110,29 @@ Changed at the default level only. If you've set either yourself in `about:confi
 
 </details>
 
+## Folder names and icons from a local model
+
+Make a folder and Zia can name it and pick its icon for you, using a model that
+runs on your machine. Three tabs from Levi's, Gucci and Louis Vuitton become a
+folder called **Clothing** with a clothing icon; PayPal, Stripe and Cash App
+become **Financial**. Nothing is sent anywhere.
+
+It's **off by default**, because the first use downloads a model (about 25MB).
+To turn it on:
+
+1. Open `about:config` and set **`browser.ml.enable`** to `true`. This is
+   Firefox's local AI runtime, which Zen ships but leaves switched off.
+2. Restart Zen.
+3. In **Settings → Sine Mods → Zia**, turn on **Suggest a folder's icon with a
+   local model**.
+
+The first folder you make takes a few seconds while the model downloads and the
+1,512 icon names are read once. After that it's immediate, and the icon names
+are cached in your profile.
+
+It only ever fills in a folder that has no icon and still has its default name,
+so anything you've named or chosen yourself is left alone.
+
 <details>
 <summary><b>Known gaps</b></summary>
 
