@@ -769,8 +769,30 @@
     }
   }
 
+  function closeNewTabUrlbar(tab) {
+    if (!searchHomeUrl || !newTabSearchEnabled()) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      try {
+        const urlbar = gURLBar;
+        if (!urlbar?.focused) {
+          return;
+        }
+        if (gBrowser.selectedTab !== tab) {
+          return;
+        }
+        urlbar.view?.close();
+        urlbar.blur();
+        gBrowser.selectedBrowser?.focus();
+      } catch (err) {
+      }
+    });
+  }
+
   function watchNewTabPage() {
     applyNewTabPage();
+    gBrowser.tabContainer.addEventListener("TabOpen", (event) => closeNewTabUrlbar(event.target));
     Services.obs.addObserver(applyNewTabPage, "browser-search-engine-modified");
     Services.prefs.addObserver("zia.newtab.search-engine", applyNewTabPage);
     window.addEventListener("unload", () => {

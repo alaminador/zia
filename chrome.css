@@ -2412,7 +2412,6 @@ tooltip[default="true"] {
   &:focus,
   &:focus-visible {
     outline: none;
-    border-color: var(--input-border-color-focus, rgba(255, 255, 255, 0.18));
   }
 }
 
@@ -2479,4 +2478,27 @@ tooltip[default="true"] {
   top: calc(var(--zen-compact-float, 6px) / 2) !important;
   bottom: calc(var(--zen-compact-float, 6px) / 2) !important;
   height: auto !important;
+}
+
+#zen-dragover-background {
+  display: none !important;
+}
+
+:root[zen-sidebar-expanded] .zen-current-workspace-indicator:not(#zia-workspace-slot > .zen-current-workspace-indicator) {
+  display: none !important;
+}
+
+.tabbrowser-tab .tab-reset-button,
+zen-folder .tab-reset-button {
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: rgb(255, 255, 255) !important;
+  fill-opacity: 1 !important;
+  color: rgb(255, 255, 255) !important;
+  border-radius: var(--zia-close-radius) !important;
+  corner-shape: round !important;
+}
+
+#urlbar #identity-icon-label,
+#urlbar .identity-icon-label {
+  display: none !important;
 }

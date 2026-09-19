@@ -70,7 +70,7 @@ Covers come from an icon picker Zia adds as a third tab beside Zen's own: 1,512 
 
 Playing music gives you a card with the track's artwork and a glow in its colours. Sound bars in those same colours appear on essentials and tabs, turning to dots when muted, and clicking them toggles the sound. It handles livestreams as well as ordinary videos.
 
-![The music player card](https://github.com/user-attachments/assets/94cb66a2-99d8-4bdb-8ae7-0e676ea59718)
+![The music player card](https://github.com/user-attachments/assets/5b4e2542-61a9-4fd6-b2ee-7fb58970ef5b)
 
 Split view gives each pane its own toolbar. Dragging a tab over the page brings up drop cards for either side, growing and turning blue as you get near the edge:
 
