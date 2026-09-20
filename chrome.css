@@ -485,11 +485,23 @@
   --toolbar-field-color: rgb(28, 28, 30) !important;
   --zen-toolbar-element-bg: rgba(0, 0, 0, 0.06) !important;
   --zen-toolbar-element-bg-hover: rgba(0, 0, 0, 0.1) !important;
+}
 
-  & #urlbar[breakout-extend] {
-    color-scheme: dark !important;
+
+/* The expanded panel stays dark, independently of the site and browser theme. */
+:root #urlbar[breakout-extend] {
+  color-scheme: dark !important;
+  color: rgb(251, 251, 254) !important;
+  --toolbar-field-color: rgb(251, 251, 254) !important;
+  --toolbar-field-focus-color: rgb(251, 251, 254) !important;
+
+  & .urlbar-input {
     color: rgb(251, 251, 254) !important;
-    --toolbar-field-color: rgb(251, 251, 254) !important;
+  }
+
+  & .urlbar-icon {
+    color: rgb(251, 251, 254) !important;
+    fill: currentColor !important;
   }
 }
 
