@@ -2675,3 +2675,44 @@ zen-folder .tab-reset-button {
      open-from-click horizontal nudge would only push it off. */
   translate: 0 var(--zia-urlbar-open-offset) !important;
 }
+
+/* Persistent search field at the top of the sidebar. It is a button dressed as
+   a field: clicking it runs Open Location, so the real address bar takes over. */
+#zia-sidebar-search {
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 4px var(--zia-side-space, 8px) 8px !important;
+  padding: 7px 10px !important;
+  border-radius: var(--zia-pop-row-radius, 10px) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  transition: background 0.12s ease, border-color 0.12s ease !important;
+}
+
+#zia-sidebar-search:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#zia-sidebar-search .zia-sidebar-search-icon {
+  width: 15px !important;
+  height: 15px !important;
+  opacity: 0.65 !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: currentColor !important;
+  list-style-image: url("chrome://sine/content/zia/icons/phosphor/magnifying-glass.svg") !important;
+}
+
+#zia-sidebar-search .zia-sidebar-search-label {
+  opacity: 0.6 !important;
+  font-size: var(--zia-text-size, 13px) !important;
+  font-weight: var(--zia-tab-weight, 500) !important;
+  margin: 0 !important;
+}
+
+/* The sidebar collapses to icons in compact mode, where a text field has no
+   room, so hide it there rather than letting it squash. */
+:root[zen-compact-mode="true"]:not([zen-user-show]):not([zen-has-hover])
+  #zia-sidebar-search {
+  display: none !important;
+}

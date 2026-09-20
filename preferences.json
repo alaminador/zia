@@ -58,6 +58,18 @@
     "defaultValue": true
   },
   {
+    "type": "checkbox",
+    "label": "Search field at the top of the sidebar",
+    "property": "zia.features.sidebar-search",
+    "defaultValue": true
+  },
+  {
+    "type": "checkbox",
+    "label": "Open the search overlay automatically on a new tab",
+    "property": "zia.features.newtab-search",
+    "defaultValue": true
+  },
+  {
     "type": "separator",
     "label": "New tabs"
   },

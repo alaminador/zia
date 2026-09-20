@@ -3164,7 +3164,77 @@
     }
   }
 
-  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab"];
+  function openAddressBar() {
+    // The standard Open Location command focuses the bar and expands the view,
+    // which is exactly what clicking the closed bar does.
+    const command = document.getElementById("Browser:OpenLocation");
+    if (command) {
+      command.doCommand();
+      return true;
+    }
+    try {
+      gURLBar.focus();
+      gURLBar.select();
+      return true;
+    } catch (err) {
+      console.error("[Zia] Could not open the address bar:", err);
+      return false;
+    }
+  }
+
+  function addSidebarSearch() {
+    const anchor = document.getElementById("zen-sidebar-top-buttons");
+    const host = anchor?.parentElement;
+    if (!host || document.getElementById("zia-sidebar-search")) {
+      return;
+    }
+
+    const box = document.createXULElement("hbox");
+    box.id = "zia-sidebar-search";
+
+    const icon = document.createXULElement("image");
+    icon.className = "zia-sidebar-search-icon";
+
+    const label = document.createXULElement("label");
+    label.className = "zia-sidebar-search-label";
+    label.setAttribute("value", "Search...");
+
+    box.append(icon, label);
+    anchor.after(box);
+
+    box.addEventListener("click", () => openAddressBar());
+    box.addEventListener("keypress", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openAddressBar();
+      }
+    });
+  }
+
+  function watchNewTabSearch() {
+    const BLANK = new Set(["about:blank", "about:newtab", ""]);
+
+    gBrowser.tabContainer.addEventListener("TabOpen", (event) => {
+      const tab = event.target;
+      // Let the tab settle so we do not race Zen's own focus handling.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (gBrowser.selectedTab !== tab || tab.closing) {
+            return;
+          }
+          const spec = tab.linkedBrowser?.currentURI?.spec ?? "";
+          if (!BLANK.has(spec)) {
+            return;
+          }
+          if (!gURLBar?.focused) {
+            openAddressBar();
+          }
+        })
+      );
+    });
+  }
+
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab", "sidebar-search", "newtab-search"];
 
   function featureOn(name) {
     try {
@@ -4210,6 +4280,8 @@
     ifOn("collapse-in-urlbar", "moveCollapseButtonToUrlbar", moveCollapseButtonToUrlbar);
     safely("applySidebarWidth", applySidebarWidth);
     safely("applyUrlbarWidth", applyUrlbarWidth);
+    ifOn("sidebar-search", "addSidebarSearch", addSidebarSearch);
+    ifOn("newtab-search", "watchNewTabSearch", watchNewTabSearch);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {
       const browser = gBrowser.selectedBrowser;
