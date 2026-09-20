@@ -3234,39 +3234,7 @@
     });
   }
 
-  function applySearchTreatment() {
-    const apply = () => {
-      const on = featureOn("arc-search");
-      setFlag("zia-arc-search", on);
-      if (!on) {
-        root.style.removeProperty("--zia-search-blur");
-        return;
-      }
-      let blur = "";
-      try {
-        blur = Services.prefs.getCharPref("zia.search.blur", "").trim();
-      } catch (err) {
-        blur = "";
-      }
-      if (blur) {
-        root.style.setProperty(
-          "--zia-search-blur",
-          /^[0-9.]+$/.test(blur) ? `${blur}px` : blur
-        );
-      } else {
-        root.style.removeProperty("--zia-search-blur");
-      }
-    };
-
-    apply();
-
-    for (const pref of ["zia.features.arc-search", "zia.search.blur"]) {
-      Services.prefs.addObserver(pref, apply);
-      window.addEventListener("unload", () => Services.prefs.removeObserver(pref, apply));
-    }
-  }
-
-  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab", "sidebar-search", "newtab-search", "arc-search"];
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab", "sidebar-search", "newtab-search"];
 
   function featureOn(name) {
     try {
@@ -4314,7 +4282,6 @@
     safely("applyUrlbarWidth", applyUrlbarWidth);
     ifOn("sidebar-search", "addSidebarSearch", addSidebarSearch);
     ifOn("newtab-search", "watchNewTabSearch", watchNewTabSearch);
-    safely("applySearchTreatment", applySearchTreatment);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {
       const browser = gBrowser.selectedBrowser;
