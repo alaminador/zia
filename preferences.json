@@ -134,5 +134,45 @@
         "value": "400px"
       }
     ]
+  },
+  {
+    "type": "separator",
+    "label": "Address bar"
+  },
+  {
+    "type": "dropdown",
+    "label": "Width of the expanded address bar",
+    "property": "zia.urlbar.expanded-width",
+    "placeholder": "Zen's own width",
+    "options": [
+      {
+        "label": "Full content width",
+        "value": "content"
+      },
+      {
+        "label": "600 px",
+        "value": "600px"
+      },
+      {
+        "label": "700 px",
+        "value": "700px"
+      },
+      {
+        "label": "800 px",
+        "value": "800px"
+      },
+      {
+        "label": "900 px",
+        "value": "900px"
+      },
+      {
+        "label": "1000 px",
+        "value": "1000px"
+      },
+      {
+        "label": "1200 px",
+        "value": "1200px"
+      }
+    ]
   }
 ]

@@ -3106,6 +3106,64 @@
     );
   }
 
+  function applyUrlbarWidth() {
+    const read = () => {
+      try {
+        return Services.prefs.getCharPref("zia.urlbar.expanded-width", "").trim();
+      } catch (err) {
+        return "";
+      }
+    };
+
+    const measure = () => {
+      // The navbar wrapper spans exactly the content area, which is the width
+      // the expanded bar should match.
+      const row = document.getElementById("zen-appcontent-navbar-wrapper");
+      const width = row?.getBoundingClientRect?.().width;
+      return width > 0 ? width : null;
+    };
+
+    const apply = () => {
+      const value = read();
+      if (!value) {
+        root.style.removeProperty("--zia-urlbar-wide-width");
+        setFlag("zia-wide-urlbar", false);
+        return;
+      }
+      if (value === "content") {
+        const width = measure();
+        if (!width) {
+          setFlag("zia-wide-urlbar", false);
+          return;
+        }
+        root.style.setProperty("--zia-urlbar-wide-width", `${Math.round(width)}px`);
+      } else {
+        root.style.setProperty(
+          "--zia-urlbar-wide-width",
+          /^[0-9.]+$/.test(value) ? `${value}px` : value
+        );
+      }
+      setFlag("zia-wide-urlbar", true);
+    };
+
+    apply();
+
+    Services.prefs.addObserver("zia.urlbar.expanded-width", apply);
+    window.addEventListener("unload", () =>
+      Services.prefs.removeObserver("zia.urlbar.expanded-width", apply)
+    );
+    window.addEventListener("resize", apply);
+
+    // Remeasure as the bar opens, since the sidebar may have just changed width.
+    const urlbar = gURLBar.textbox || document.getElementById("urlbar");
+    if (urlbar) {
+      new MutationObserver(apply).observe(urlbar, {
+        attributes: true,
+        attributeFilter: ["breakout-extend"],
+      });
+    }
+  }
+
   const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab"];
 
   function featureOn(name) {
@@ -4151,6 +4209,7 @@
     ifOn("fold-on-start", "collapseFoldersOnStart", collapseFoldersOnStart);
     ifOn("collapse-in-urlbar", "moveCollapseButtonToUrlbar", moveCollapseButtonToUrlbar);
     safely("applySidebarWidth", applySidebarWidth);
+    safely("applyUrlbarWidth", applyUrlbarWidth);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {
       const browser = gBrowser.selectedBrowser;

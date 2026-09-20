@@ -2664,3 +2664,14 @@ zen-folder .tab-reset-button {
   :is(zen-folder, tab-group):not([split-view-group]) {
   display: none !important;
 }
+
+/* Width of the expanded address bar. Zia leaves this to Firefox's megabar
+   sizing outside split view, which comes out narrower than the content area.
+   Split view keeps its own pane-derived geometry. */
+:root[zia-wide-urlbar="true"]:not([zia-split="true"]) #urlbar[breakout-extend] {
+  width: var(--zia-urlbar-wide-width) !important;
+  max-width: none !important;
+  /* A full-width bar is already at the content's left edge, so the
+     open-from-click horizontal nudge would only push it off. */
+  translate: 0 var(--zia-urlbar-open-offset) !important;
+}
