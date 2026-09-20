@@ -631,7 +631,7 @@
     // closed one. A new tab opens it without a click, which left it parked to
     // the right; align it the same way wherever it was opened from.
     const openedByClick =
-      featureOn("urlbar-align") || Date.now() - clickedUrlbarAt < 1500;
+      (diaUrlbar() && featureOn("urlbar-align")) || Date.now() - clickedUrlbarAt < 1500;
     if (!openedByClick && openOffsetX) {
       openOffsetX = 0;
       root.style.setProperty("--zia-urlbar-open-offset-x", "0px");
@@ -3125,7 +3125,7 @@
 
     const apply = () => {
       const value = read();
-      if (!value) {
+      if (!value || !diaUrlbar()) {
         root.style.removeProperty("--zia-urlbar-wide-width");
         setFlag("zia-wide-urlbar", false);
         return;
@@ -3183,6 +3183,9 @@
   }
 
   function addSidebarSearch() {
+    if (!diaUrlbar()) {
+      return;
+    }
     const anchor = document.getElementById("zen-sidebar-top-buttons");
     const host = anchor?.parentElement;
     if (!host || document.getElementById("zia-sidebar-search")) {
@@ -3232,6 +3235,28 @@
         })
       );
     });
+  }
+
+  function urlbarStyle() {
+    try {
+      const value = Services.prefs.getCharPref("zia.urlbar.style", "zen").trim().toLowerCase();
+      return value === "dia" ? "dia" : "zen";
+    } catch (err) {
+      return "zen";
+    }
+  }
+
+  function diaUrlbar() {
+    return urlbarStyle() === "dia";
+  }
+
+  function applyUrlbarStyle() {
+    const apply = () => setFlag("zia-urlbar-dia", diaUrlbar());
+    apply();
+    Services.prefs.addObserver("zia.urlbar.style", apply);
+    window.addEventListener("unload", () =>
+      Services.prefs.removeObserver("zia.urlbar.style", apply)
+    );
   }
 
   const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab", "sidebar-search", "newtab-search"];
@@ -4279,6 +4304,7 @@
     ifOn("fold-on-start", "collapseFoldersOnStart", collapseFoldersOnStart);
     ifOn("collapse-in-urlbar", "moveCollapseButtonToUrlbar", moveCollapseButtonToUrlbar);
     safely("applySidebarWidth", applySidebarWidth);
+    safely("applyUrlbarStyle", applyUrlbarStyle);
     safely("applyUrlbarWidth", applyUrlbarWidth);
     ifOn("sidebar-search", "addSidebarSearch", addSidebarSearch);
     ifOn("newtab-search", "watchNewTabSearch", watchNewTabSearch);

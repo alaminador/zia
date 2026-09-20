@@ -2716,3 +2716,14 @@ zen-folder .tab-reset-button {
   #zia-sidebar-search {
   display: none !important;
 }
+
+/* Zen style: stay out of the way entirely. Zen's own address bar sits above
+   the essentials and behaves as it does by default. */
+:root:not([zia-urlbar-dia="true"]) #zia-sidebar-search {
+  display: none !important;
+}
+
+:root:not([zia-urlbar-dia="true"]) #urlbar[breakout-extend] {
+  width: auto !important;
+  max-width: none !important;
+}

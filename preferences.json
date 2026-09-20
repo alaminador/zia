@@ -153,6 +153,23 @@
   },
   {
     "type": "dropdown",
+    "label": "Address bar style",
+    "property": "zia.urlbar.style",
+    "defaultValue": "zen",
+    "placeholder": false,
+    "options": [
+      {
+        "label": "Zen \u2014 bar at the top of the sidebar",
+        "value": "zen"
+      },
+      {
+        "label": "Dia \u2014 floating palette over the page",
+        "value": "dia"
+      }
+    ]
+  },
+  {
+    "type": "dropdown",
     "label": "Width of the expanded address bar",
     "property": "zia.urlbar.expanded-width",
     "placeholder": "Zen's own width",
