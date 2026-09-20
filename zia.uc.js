@@ -2993,7 +2993,50 @@
     }
   }
 
-  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start"];
+  function moveCollapseButtonToUrlbar() {
+    let placing = false;
+
+    const place = () => {
+      if (placing) {
+        return;
+      }
+      const button = document.getElementById("zen-toggle-compact-mode");
+      const back = document.getElementById("back-button");
+      const row = back?.parentElement;
+      if (!button || !row) {
+        return;
+      }
+      // Already sitting just left of the back arrow: nothing to do.
+      if (button.parentElement === row && button.nextElementSibling === back) {
+        return;
+      }
+      placing = true;
+      try {
+        row.insertBefore(button, back);
+        button.setAttribute("zia-in-urlbar", "true");
+      } finally {
+        placing = false;
+      }
+    };
+
+    place();
+
+    // Zen rebuilds the toolbar when compact mode and workspaces change, which
+    // drops the button back into the sidebar. Put it back each time.
+    const navBar = document.getElementById("nav-bar");
+    if (navBar) {
+      new MutationObserver(place).observe(navBar, { childList: true, subtree: true });
+    }
+    new MutationObserver(place).observe(root, {
+      attributes: true,
+      attributeFilter: ["zen-compact-mode"],
+    });
+    window.addEventListener("ZenWorkspacesUIUpdate", place);
+    setTimeout(place, 800);
+    setTimeout(place, 2000);
+  }
+
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar"];
 
   function featureOn(name) {
     try {
@@ -4036,6 +4079,7 @@
     safely("watchCompactTopRow", watchCompactTopRow);
     safely("watchNewFolders", watchNewFolders);
     ifOn("fold-on-start", "collapseFoldersOnStart", collapseFoldersOnStart);
+    ifOn("collapse-in-urlbar", "moveCollapseButtonToUrlbar", moveCollapseButtonToUrlbar);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {
       const browser = gBrowser.selectedBrowser;

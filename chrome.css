@@ -2631,3 +2631,14 @@ zen-folder .tab-reset-button {
     }
   }
 }
+
+/* The sidebar collapse button, once moved into the top toolbar. It inherits the
+   sidebar's sizing otherwise, which is a little large next to the back arrow. */
+#zen-toggle-compact-mode[zia-in-urlbar="true"] {
+  margin-inline: 0 2px !important;
+  opacity: 0.85;
+}
+
+#zen-toggle-compact-mode[zia-in-urlbar="true"]:hover {
+  opacity: 1;
+}

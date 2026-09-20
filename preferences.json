@@ -40,6 +40,12 @@
     "defaultValue": true
   },
   {
+    "type": "checkbox",
+    "label": "Show the sidebar collapse button in the top toolbar",
+    "property": "zia.features.collapse-in-urlbar",
+    "defaultValue": true
+  },
+  {
     "type": "separator",
     "label": "New tabs"
   },
