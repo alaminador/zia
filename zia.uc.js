@@ -3048,6 +3048,44 @@
     setTimeout(place, 2000);
   }
 
+  function applySidebarWidth() {
+    const read = () => {
+      try {
+        return Services.prefs.getCharPref("zia.sidebar.width", "").trim();
+      } catch (err) {
+        return "";
+      }
+    };
+
+    const apply = () => {
+      const value = read();
+      if (!value) {
+        root.style.removeProperty("--zia-sidebar-width");
+        setFlag("zia-fixed-sidebar", false);
+        return;
+      }
+      // Accept a bare number as pixels so "280" and "280px" both work.
+      const width = /^[0-9.]+$/.test(value) ? `${value}px` : value;
+      root.style.setProperty("--zia-sidebar-width", width);
+      setFlag("zia-fixed-sidebar", true);
+    };
+
+    apply();
+
+    Services.prefs.addObserver("zia.sidebar.width", apply);
+    window.addEventListener("unload", () =>
+      Services.prefs.removeObserver("zia.sidebar.width", apply)
+    );
+
+    // Zen stores the sidebar width per workspace and re-applies it on a space
+    // switch, so reassert ours whenever the workspace UI updates.
+    window.addEventListener("ZenWorkspacesUIUpdate", apply);
+    Services.prefs.addObserver("zen.workspaces.active", apply);
+    window.addEventListener("unload", () =>
+      Services.prefs.removeObserver("zen.workspaces.active", apply)
+    );
+  }
+
   const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab"];
 
   function featureOn(name) {
@@ -4092,6 +4130,7 @@
     safely("watchNewFolders", watchNewFolders);
     ifOn("fold-on-start", "collapseFoldersOnStart", collapseFoldersOnStart);
     ifOn("collapse-in-urlbar", "moveCollapseButtonToUrlbar", moveCollapseButtonToUrlbar);
+    safely("applySidebarWidth", applySidebarWidth);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {
       const browser = gBrowser.selectedBrowser;

@@ -86,5 +86,53 @@
     "label": "Use Zen's accent color for the loading bar (default: Zia blue)",
     "property": "zia.loading-bar.accent-color",
     "defaultValue": false
+  },
+  {
+    "type": "separator",
+    "label": "Sidebar"
+  },
+  {
+    "type": "dropdown",
+    "label": "Sidebar width (applies to every space)",
+    "property": "zia.sidebar.width",
+    "placeholder": "Zen's own width (per space)",
+    "options": [
+      {
+        "label": "200 px",
+        "value": "200px"
+      },
+      {
+        "label": "220 px",
+        "value": "220px"
+      },
+      {
+        "label": "240 px",
+        "value": "240px"
+      },
+      {
+        "label": "260 px",
+        "value": "260px"
+      },
+      {
+        "label": "280 px",
+        "value": "280px"
+      },
+      {
+        "label": "300 px",
+        "value": "300px"
+      },
+      {
+        "label": "320 px",
+        "value": "320px"
+      },
+      {
+        "label": "360 px",
+        "value": "360px"
+      },
+      {
+        "label": "400 px",
+        "value": "400px"
+      }
+    ]
   }
 ]

@@ -3,7 +3,7 @@
   "name": "Zia",
   "description": "Makes Zen's browser frame look like Dia. Personal fork: Arc-style new tab bar, folders collapsed on startup.",
   "author": "z1n-k",
-  "version": "2.13.4-ador",
+  "version": "2.14.0-ador",
   "style": {
     "chrome": "chrome.css"
   },

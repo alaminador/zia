@@ -2642,3 +2642,17 @@ zen-folder .tab-reset-button {
 #zen-toggle-compact-mode[zia-in-urlbar="true"]:hover {
   opacity: 1;
 }
+
+/* One sidebar width for every space. Zen stores the expanded width per
+   workspace, so spaces drift apart; when zia.sidebar.width is set we pin all
+   of them to the same value. Compact mode keeps Zen's own sizing. */
+:root[zia-fixed-sidebar="true"]:not([zen-compact-mode="true"]) #navigator-toolbox {
+  --zen-sidebar-width: var(--zia-sidebar-width) !important;
+}
+
+:root[zia-fixed-sidebar="true"]:not([zen-compact-mode="true"])[zen-sidebar-expanded="true"]
+  #navigator-toolbox {
+  width: var(--zia-sidebar-width) !important;
+  min-width: var(--zia-sidebar-width) !important;
+  max-width: var(--zia-sidebar-width) !important;
+}
