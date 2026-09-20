@@ -2716,3 +2716,58 @@ zen-folder .tab-reset-button {
   #zia-sidebar-search {
   display: none !important;
 }
+
+/* ---------------- Arc-style search treatment ----------------
+   The page recedes behind the open address bar and the panel reads as glass.
+   Technique borrowed from YashjitPal/Arc-2.0 (no licence declared, so this is
+   written against Zia's own variables rather than copied). */
+
+/* The page blurs and pushes back while the bar is open. */
+:root[zia-arc-search="true"] #browser:has(#urlbar[breakout-extend]) .browserStack {
+  scale: 1.075 !important;
+  filter: blur(var(--zia-search-blur, 25px)) !important;
+  transition: scale 0.22s ease, filter 0.22s ease !important;
+}
+
+:root[zia-arc-search="true"] #browser .browserStack {
+  transition: scale 0.22s ease, filter 0.22s ease;
+}
+
+/* Closed bar: tint deepens on hover, then on focus. */
+:root[zia-arc-search="true"] #urlbar:not([breakout-extend]) > .urlbar-background {
+  background-color: light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 5%)) !important;
+  transition: background-color 0.12s ease !important;
+}
+
+:root[zia-arc-search="true"] #urlbar:not([breakout-extend]):hover > .urlbar-background {
+  background-color: light-dark(rgb(0 0 0 / 10%), rgb(255 255 255 / 10%)) !important;
+}
+
+:root[zia-arc-search="true"]
+  #urlbar:not([breakout-extend])[focused="true"]
+  > .urlbar-background {
+  background-color: light-dark(rgb(0 0 0 / 12.5%), rgb(255 255 255 / 12.5%)) !important;
+}
+
+/* Open bar: translucent glass panel with a deep shadow. */
+:root[zia-arc-search="true"] #urlbar[breakout-extend] > .urlbar-background {
+  background-color: light-dark(rgb(255 255 255 / 25%), rgb(0 0 0 / 25%)) !important;
+  backdrop-filter: blur(var(--zia-search-blur, 25px)) saturate(1.6) !important;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 50%) !important;
+  overflow: hidden !important;
+}
+
+/* Suggestion rows nudge sideways as they highlight. */
+:root[zia-arc-search="true"] #urlbar[breakout-extend] .urlbarView-row {
+  transition: transform 0.12s ease, background-color 0.12s ease !important;
+}
+
+:root[zia-arc-search="true"] #urlbar[breakout-extend] .urlbarView-row:hover,
+:root[zia-arc-search="true"] #urlbar[breakout-extend] .urlbarView-row[selected] {
+  transform: translateX(2px) !important;
+}
+
+/* The sidebar field gets the same glass-on-hover feel. */
+:root[zia-arc-search="true"] #zia-sidebar-search {
+  backdrop-filter: blur(6px) saturate(1.3) !important;
+}

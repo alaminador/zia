@@ -186,5 +186,43 @@
         "value": "1200px"
       }
     ]
+  },
+  {
+    "type": "checkbox",
+    "label": "Arc-style search: blur the page and frost the open bar",
+    "property": "zia.features.arc-search",
+    "defaultValue": true
+  },
+  {
+    "type": "dropdown",
+    "label": "Blur strength behind the open search bar",
+    "property": "zia.search.blur",
+    "placeholder": "Default (25px)",
+    "options": [
+      {
+        "label": "0 px",
+        "value": "0px"
+      },
+      {
+        "label": "8 px",
+        "value": "8px"
+      },
+      {
+        "label": "16 px",
+        "value": "16px"
+      },
+      {
+        "label": "25 px",
+        "value": "25px"
+      },
+      {
+        "label": "40 px",
+        "value": "40px"
+      },
+      {
+        "label": "60 px",
+        "value": "60px"
+      }
+    ]
   }
 ]
