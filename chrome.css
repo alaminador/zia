@@ -488,7 +488,7 @@
 }
 
 
-/* The expanded panel stays dark, independently of the site and browser theme. */
+/* Dark baseline for the expanded panel; the appearance override below supplies light colours. */
 :root #urlbar[breakout-extend] {
   color-scheme: dark !important;
   color: rgb(251, 251, 254) !important;
@@ -2548,5 +2548,57 @@ zen-folder .tab-reset-button {
   }
   to {
     background-position: -30% 0;
+  }
+}
+
+/* Follow the Appearance > Website appearance selector used for this local experiment.
+   0 = dark, 1 = light, 2 = automatic (system). */
+@media -moz-pref("layout.css.prefers-color-scheme.content-override", 1),
+       (-moz-pref("layout.css.prefers-color-scheme.content-override", 2)) and (not (-moz-system-dark-theme)) {
+  :root:not([privatebrowsingmode="temporary"]) #urlbar[breakout-extend],
+  :root[zia-site-light="true"]:not([privatebrowsingmode="temporary"]) #zen-appcontent-navbar-wrapper #urlbar[breakout-extend] {
+    color-scheme: light !important;
+    color: rgb(28, 28, 30) !important;
+    --zia-urlbar-open-bg: rgb(248, 249, 250) !important;
+    --toolbar-field-color: rgb(28, 28, 30) !important;
+    --toolbar-field-focus-color: rgb(28, 28, 30) !important;
+    --urlbarView-highlight-background: rgba(28, 28, 30, 0.09) !important;
+    --urlbarView-highlight-color: rgb(28, 28, 30) !important;
+
+    & > .urlbar-background {
+      background: rgb(248, 249, 250) !important;
+      outline: 1px solid rgba(28, 28, 30, 0.12) !important;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    & .urlbar-input,
+    & .urlbarView,
+    & .urlbarView-title,
+    & .urlbarView-title strong {
+      color: rgb(28, 28, 30) !important;
+    }
+
+    & .urlbar-input::placeholder {
+      color: rgb(100, 103, 108) !important;
+      opacity: 1 !important;
+    }
+
+    & :is(.urlbarView-url, .urlbarView-action, .urlbarView-title-separator, .urlbarView-tags) {
+      color: rgb(90, 94, 100) !important;
+    }
+
+    & .urlbar-icon,
+    & .urlbarView-shortcutContent {
+      color: rgb(28, 28, 30) !important;
+      fill: currentColor !important;
+    }
+
+    & .urlbarView-row:hover {
+      background-color: rgba(28, 28, 30, 0.05) !important;
+    }
+
+    & .urlbarView-row[selected] {
+      background-color: rgba(28, 28, 30, 0.09) !important;
+    }
   }
 }
