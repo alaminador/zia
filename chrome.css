@@ -2716,3 +2716,15 @@ zen-folder .tab-reset-button {
   #zia-sidebar-search {
   display: none !important;
 }
+
+/* "Only Sidebar" mode puts Zen's real address bar in the sidebar, so our own
+   field would be a second one sitting right next to it, and the content-width
+   override would size the bar to the wrong box. Stand down in that mode. */
+:root[zen-single-toolbar="true"] #zia-sidebar-search {
+  display: none !important;
+}
+
+:root[zen-single-toolbar="true"] #urlbar[breakout-extend] {
+  width: auto !important;
+  max-width: none !important;
+}

@@ -3130,6 +3130,12 @@
         setFlag("zia-wide-urlbar", false);
         return;
       }
+      if (root.getAttribute("zen-single-toolbar") === "true") {
+        // The bar sits in the sidebar here, so content-area width is meaningless.
+        root.style.removeProperty("--zia-urlbar-wide-width");
+        setFlag("zia-wide-urlbar", false);
+        return;
+      }
       if (value === "content") {
         const width = measure();
         if (!width) {
@@ -3183,6 +3189,11 @@
   }
 
   function addSidebarSearch() {
+    // In "Only Sidebar" mode Zen already puts the real address bar in the
+    // sidebar, so adding ours would just duplicate it.
+    if (root.getAttribute("zen-single-toolbar") === "true") {
+      return;
+    }
     const anchor = document.getElementById("zen-sidebar-top-buttons");
     const host = anchor?.parentElement;
     if (!host || document.getElementById("zia-sidebar-search")) {
