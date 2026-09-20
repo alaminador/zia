@@ -2957,14 +2957,34 @@
       try {
         folder.collapsed = true;
       } catch (err) {
+        // ignored: the attribute fallback below covers it
+      }
+      // Some folder elements have no working setter, and it fails silently
+      // rather than throwing, so confirm rather than trust it.
+      if (!folder.hasAttribute("collapsed")) {
         folder.setAttribute("collapsed", "true");
       }
+    };
+
+    // Deepest first: a nested folder has to close itself, otherwise it stays
+    // rendered inside its collapsed parent with a collapsed-looking arrow.
+    const byDepth = () => {
+      const depth = (el) => {
+        let n = 0;
+        for (let p = el.parentElement; p; p = p.parentElement) {
+          if (p.matches?.(FOLDER_SELECTOR)) n++;
+        }
+        return n;
+      };
+      return [...document.querySelectorAll(FOLDER_SELECTOR)].sort(
+        (a, b) => depth(b) - depth(a)
+      );
     };
 
     const sweep = () => {
       const active = gBrowser.selectedTab?.closest?.(FOLDER_SELECTOR) ?? null;
 
-      for (const folder of document.querySelectorAll(FOLDER_SELECTOR)) {
+      for (const folder of byDepth()) {
         if (!folder.collapsed && folder !== active) {
           collapse(folder);
         }
