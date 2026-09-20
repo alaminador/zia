@@ -627,7 +627,11 @@
     const input = urlbar.querySelector(".urlbar-input");
     const inputRect = input?.getBoundingClientRect();
 
-    const openedByClick = Date.now() - clickedUrlbarAt < 1500;
+    // Upstream only aligns the expanded bar when it was opened by clicking the
+    // closed one. A new tab opens it without a click, which left it parked to
+    // the right; align it the same way wherever it was opened from.
+    const openedByClick =
+      featureOn("urlbar-align") || Date.now() - clickedUrlbarAt < 1500;
     if (!openedByClick && openOffsetX) {
       openOffsetX = 0;
       root.style.setProperty("--zia-urlbar-open-offset-x", "0px");
@@ -3036,7 +3040,7 @@
     setTimeout(place, 2000);
   }
 
-  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar"];
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align"];
 
   function featureOn(name) {
     try {

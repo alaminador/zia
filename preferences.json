@@ -46,6 +46,12 @@
     "defaultValue": true
   },
   {
+    "type": "checkbox",
+    "label": "Always align the expanded address bar to the left (not just on click)",
+    "property": "zia.features.urlbar-align",
+    "defaultValue": true
+  },
+  {
     "type": "separator",
     "label": "New tabs"
   },
