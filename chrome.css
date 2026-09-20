@@ -2656,3 +2656,11 @@ zen-folder .tab-reset-button {
   min-width: var(--zia-sidebar-width) !important;
   max-width: var(--zia-sidebar-width) !important;
 }
+
+/* Zen keeps nested folders rendered inside a collapsed parent, so a folder can
+   show a collapsed arrow with its subfolders still listed under it. Matched at
+   any depth rather than through a fixed container class. */
+:is(zen-folder, tab-group):not([split-view-group])[collapsed]
+  :is(zen-folder, tab-group):not([split-view-group]) {
+  display: none !important;
+}
