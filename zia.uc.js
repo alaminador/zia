@@ -771,7 +771,15 @@
 
       if (!newTabSearchEnabled()) {
         searchHomeUrl = null;
-        AboutNewTabModule.resetNewTabURL();
+        if (featureOn("blank-newtab")) {
+          try {
+            AboutNewTabModule.newTabURL = "about:blank";
+          } catch (err) {
+            AboutNewTabModule.resetNewTabURL();
+          }
+        } else {
+          AboutNewTabModule.resetNewTabURL();
+        }
         return;
       }
 
@@ -2933,7 +2941,7 @@
       }
     };
     set("zen.widget.mac.mono-window-controls", false);
-    set("zen.urlbar.replace-newtab", true);
+    set("zen.urlbar.replace-newtab", false);
     set("zia.newtab.search-engine", false);
     set("zen.splitView.enable-tab-drop", false);
 
@@ -3040,7 +3048,7 @@
     setTimeout(place, 2000);
   }
 
-  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align"];
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start", "collapse-in-urlbar", "urlbar-align", "blank-newtab"];
 
   function featureOn(name) {
     try {

@@ -52,6 +52,12 @@
     "defaultValue": true
   },
   {
+    "type": "checkbox",
+    "label": "New tabs open a blank page instead of Zen's new tab page",
+    "property": "zia.features.blank-newtab",
+    "defaultValue": true
+  },
+  {
     "type": "separator",
     "label": "New tabs"
   },
