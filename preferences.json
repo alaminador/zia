@@ -34,14 +34,20 @@
     "defaultValue": false
   },
   {
+    "type": "checkbox",
+    "label": "Collapse all folders when Zen starts",
+    "property": "zia.features.fold-on-start",
+    "defaultValue": true
+  },
+  {
     "type": "separator",
     "label": "New tabs"
   },
   {
     "type": "checkbox",
-    "label": "New tabs open your default search engine's page",
+    "label": "New tabs open your default search engine's page (off = Zen's floating address bar)",
     "property": "zia.newtab.search-engine",
-    "defaultValue": true
+    "defaultValue": false
   },
   {
     "type": "separator",

@@ -1,9 +1,9 @@
 {
   "id": "zia",
   "name": "Zia",
-  "description": "Makes Zen's browser frame look like Dia: page card, site-colored toolbar, Dia-style sidebar.",
+  "description": "Makes Zen's browser frame look like Dia. Personal fork: Arc-style new tab bar, folders collapsed on startup.",
   "author": "z1n-k",
-  "version": "2.13.0",
+  "version": "2.13.1-ador",
   "style": {
     "chrome": "chrome.css"
   },

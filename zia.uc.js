@@ -756,7 +756,7 @@
   let searchHomeUrl = null;
 
   function newTabSearchEnabled() {
-    return Services.prefs.getBoolPref("zia.newtab.search-engine", true);
+    return Services.prefs.getBoolPref("zia.newtab.search-engine", false);
   }
 
   async function applyNewTabPage() {
@@ -2929,7 +2929,8 @@
       }
     };
     set("zen.widget.mac.mono-window-controls", false);
-    set("zen.urlbar.replace-newtab", false);
+    set("zen.urlbar.replace-newtab", true);
+    set("zia.newtab.search-engine", false);
     set("zen.splitView.enable-tab-drop", false);
 
     for (const feature of FEATURES) {
@@ -2939,7 +2940,60 @@
     set("zia.features.folder-icon-suggest", false);
   }
 
-  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest"];
+  function collapseFoldersOnStart() {
+    const collapse = (folder) => {
+      try {
+        folder.collapsed = true;
+      } catch (err) {
+        folder.setAttribute("collapsed", "true");
+      }
+    };
+
+    const sweep = () => {
+      const active = gBrowser.selectedTab?.closest?.(FOLDER_SELECTOR) ?? null;
+
+      for (const folder of document.querySelectorAll(FOLDER_SELECTOR)) {
+        if (!folder.collapsed && folder !== active) {
+          collapse(folder);
+        }
+      }
+
+      // Firefox won't collapse the group that owns the selected tab, so step
+      // outside it for a moment and put the selection back afterwards.
+      if (active && !active.collapsed) {
+        const outside = gBrowser.visibleTabs.find(
+          (tab) => !tab.closing && tab.closest(FOLDER_SELECTOR) !== active
+        );
+        if (outside) {
+          const restore = gBrowser.selectedTab;
+          gBrowser.selectedTab = outside;
+          collapse(active);
+          if (!restore.closing) {
+            gBrowser.selectedTab = restore;
+          }
+        }
+      }
+    };
+
+    // Session restore rewrites folder state as it rebuilds tabs, so collapsing
+    // any earlier than this just gets overwritten. Sweep twice for late arrivals.
+    const run = () => {
+      setTimeout(sweep, 1200);
+      setTimeout(sweep, 2600);
+    };
+
+    const sessionStore =
+      window.SessionStore ||
+      ChromeUtils.importESModule("resource:///modules/sessionstore/SessionStore.sys.mjs").SessionStore;
+
+    if (sessionStore?.promiseInitialized) {
+      sessionStore.promiseInitialized.then(run, run);
+    } else {
+      run();
+    }
+  }
+
+  const FEATURES = ["media-player", "find-bar", "icon-picker", "undo-close", "folder-icon-suggest", "fold-on-start"];
 
   function featureOn(name) {
     try {
@@ -3981,6 +4035,7 @@
     ifOn("icon-picker", "addIconPicker", addIconPicker);
     safely("watchCompactTopRow", watchCompactTopRow);
     safely("watchNewFolders", watchNewFolders);
+    ifOn("fold-on-start", "collapseFoldersOnStart", collapseFoldersOnStart);
 
     gBrowser.tabContainer.addEventListener("TabSelect", () => {
       const browser = gBrowser.selectedBrowser;
