@@ -2656,18 +2656,3 @@ zen-folder .tab-reset-button {
   min-width: var(--zia-sidebar-width) !important;
   max-width: var(--zia-sidebar-width) !important;
 }
-
-/* A collapsed folder should hide everything inside it. Zen's own styling hides
-   child tabs but leaves nested folders rendered, which is why a folder could
-   show a collapsed arrow with its subfolders still listed underneath. */
-:is(zen-folder, tab-group):not([split-view-group])[collapsed]
-  > .tab-group-container
-  > :is(zen-folder, tab-group):not([split-view-group]) {
-  display: none !important;
-}
-
-:is(zen-folder, tab-group):not([split-view-group])[collapsed]
-  > .tab-group-container
-  > .tabbrowser-tab:not([selected]):not([visuallyselected]) {
-  display: none !important;
-}
